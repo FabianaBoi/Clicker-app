@@ -15,6 +15,6 @@ def incrementCounter (request) :
 
 
 def clicksSoFar (request) : 
-    counter = request.id
-
-    return id
+    #counter = request.id
+    counter = SaveToDb.getCount()
+    return JsonResponse({'response_text': counter})

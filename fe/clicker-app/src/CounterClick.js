@@ -11,12 +11,12 @@ constructor(props) {
     this.state = {
         counter: "0", 
     };
-
+    this.getCount = this.getCount.bind(this);
     this.increaseCounter = this.increaseCounter.bind(this);
 }
   componentDidMount(){
     
-    this.increaseCounter();
+    this.getCount();
   }
 
  increaseCounter() {
@@ -38,6 +38,27 @@ constructor(props) {
     }).catch((error) => {
         console.log(error, "catch the hoop")
       });
+}
+
+getCount() {
+  fetch('/api/clicks/', {
+  method: "GET",
+  dataType: "JSON",
+  headers: {
+    "Content-Type": "application/json; charset=utf-8",
+  }})
+  .then(response =>{
+      return response.json();
+    })
+  .then(response => {
+      if(response) {
+
+          this.setState({ counter: response.response_text});
+      }
+      
+  }).catch((error) => {
+      console.log(error, "catch the hoop")
+    });
 }
 
 render() {

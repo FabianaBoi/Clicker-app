@@ -9,3 +9,6 @@ def SaveClick(parameter_list):
 
     c.save()
     return click_info.objects.count()
+
+def getCount():
+    return click_info.objects.count()
