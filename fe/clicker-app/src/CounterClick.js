@@ -3,26 +3,41 @@ import axios from 'axios';
 
 class CounterClick extends Component {
 
-state = {
-    counter: '0', 
-} 
 
 
-constructor() {
-    super();
+constructor(props) {
+    super(props);
 
     this.state = {
-        counter: '0', 
+        counter: "0", 
     };
-}
 
+    this.increaseCounter = this.increaseCounter.bind(this);
+}
+  componentDidMount(){
+    
+    this.increaseCounter();
+  }
 
  increaseCounter() {
-    fetch('/api/increase/')
-    .then(res => { 
-            console.log(res.data)
-                this.counter= res.data.response_text;
-    })
+    fetch('/api/increase/', {
+    method: "GET",
+    dataType: "JSON",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    }})
+    .then(response =>{
+        return response.json();
+      })
+    .then(response => {
+        if(response) {
+
+            this.setState({ counter: response.response_text});
+        }
+        
+    }).catch((error) => {
+        console.log(error, "catch the hoop")
+      });
 }
 
 render() {

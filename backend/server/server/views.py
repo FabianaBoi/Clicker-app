@@ -13,3 +13,8 @@ def incrementCounter (request) :
     #estrarre dal db il numero di righe (record)
     return JsonResponse({'response_text': result_count})
 
+
+def clicksSoFar (request) : 
+    counter = request.id
+
+    return id
